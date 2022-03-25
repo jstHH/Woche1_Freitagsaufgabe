@@ -2,11 +2,37 @@ package jst.freitagsaufgabe;
 
 public class PasswordValidator {
 
-    //Validator Main Method ---------
 
+    //Validator Main Methods ---------
     public boolean isValidPassword (String password) {
 
-        return true;
+        if (isValidSimple(password)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean isValidPassword (String password, String group) {
+
+        switch (group) {
+            case "simple":
+                if (isValidPassword(password)) {
+                    return true;
+                }
+                break;
+            case "advanced":
+                if (isValidAdvanced(password)) {
+                    return true;
+                }
+                break;
+            default:
+                if (isValidSimple(password)) {
+                    return true;
+                }
+        }
+
+        return false;
     }
 
     //Validation Groups (Simple, Advanced ...)
@@ -15,6 +41,15 @@ public class PasswordValidator {
         if (hasLength(password) && hasNumber(password))
             return true;
 
+        return false;
+    }
+
+    public boolean isValidAdvanced(String password) {
+        if (isValidSimple(password)) {
+            if (hasLowerCase(password) && hasUpperCase(password) && !(isWeak(password))) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -30,25 +65,50 @@ public class PasswordValidator {
 
     public boolean hasNumber (String password) {
         char[] compareArray = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'};
-        for (int i = 0; i <= password.length() - 1; i++) {
-            for (int j = 0; j <= compareArray.length - 1; j++) {
-                if (password.charAt(i) == compareArray[j]) {
-                    return true;
-                }
-            }
+        if (doesStringContains(password, compareArray))
+            return true;
+        return false;
+    }
+
+    //8 Numbers required
+    public boolean hasLowerCase(String password){
+        char[] compareArray = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+        if (doesStringContains(password, compareArray)) {
+            return true;
         }
 
         return false;
     }
 
-    //8 Numbers required
-    public boolean hasUpperCase (String password){
-        return true;
+    public boolean hasUpperCase(String password){
+        char[] compareArray = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+        if (doesStringContains(password, compareArray))
+            return true;
 
+        return false;
     }
 
-    public boolean hasLowerCase (String password){
+    public boolean isWeak(String password) {
+        String[] weakPassword = {"123456", "123456789", "12345678", "password", "qwertz"};
 
-        return true;
+        for (int i = 0; i <= weakPassword.length - 1; i++)
+            if (password.equals(weakPassword[i])) {
+                return true;
+            }
+
+        return false;
     }
+
+    public boolean doesStringContains(String toCheck, char[] compareArray) {
+
+        for (int i = 0; i <= toCheck.length() - 1; i++) {
+            for (int j = 0; j <= compareArray.length - 1; j++) {
+                if (toCheck.charAt(i) == compareArray[j]) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }

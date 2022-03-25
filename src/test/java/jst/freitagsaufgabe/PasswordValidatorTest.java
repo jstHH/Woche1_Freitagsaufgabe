@@ -46,13 +46,13 @@ class PasswordValidatorTest {
     @Test
     void hasLength_when7_thenFalse() {
         String input = "abcdefg";
-        assertFalse(validator.hasLength(input));
+        assertFalse(validator.hasMinLength(input));
     }
 
     @Test
     void hasLength_when8_thenTrue() {
         String input = "abcdefgh";
-        assertTrue(validator.hasLength(input));
+        assertTrue(validator.hasMinLength(input));
     }
 
     @Test

@@ -1,5 +1,7 @@
 package jst.freitagsaufgabe;
 
+import java.util.Locale;
+
 public class PasswordValidator {
 
 
@@ -38,7 +40,7 @@ public class PasswordValidator {
     //Validation Groups (Simple, Advanced ...)
 
     public boolean isValidSimple(String password) {
-        if (hasLength(password) && hasNumber(password))
+        if (hasMinLength(password) && hasNumber(password))
             return true;
 
         return false;
@@ -55,7 +57,7 @@ public class PasswordValidator {
 
     //Validation Steps------------
 
-    public boolean hasLength(String password) {
+    public boolean hasMinLength(String password) {
         if (password.length() <= 7) {
             return false;
         }
@@ -64,26 +66,31 @@ public class PasswordValidator {
     }
 
     public boolean hasNumber (String password) {
-        char[] compareArray = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'};
-        if (doesStringContains(password, compareArray))
-            return true;
+        for (int i = 0; i <= password.length() - 1; i++) {
+            if (Character.isDigit(password.charAt(i))) {
+                return true;
+            }
+        }
         return false;
     }
 
     //8 Numbers required
     public boolean hasLowerCase(String password){
-        char[] compareArray = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
-        if (doesStringContains(password, compareArray)) {
-            return true;
+        for (int i = 0; i <= password.length() - 1; i++ ) {
+            if (Character.isLowerCase(password.charAt(i))) {
+                return true;
+            }
         }
 
         return false;
     }
 
     public boolean hasUpperCase(String password){
-        char[] compareArray = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
-        if (doesStringContains(password, compareArray))
-            return true;
+        for (int i = 0; i <= password.length() - 1; i++) {
+            if (Character.isUpperCase(password.charAt(i))) {
+                return true;
+            }
+        }
 
         return false;
     }
@@ -92,7 +99,7 @@ public class PasswordValidator {
         String[] weakPassword = {"123456", "123456789", "12345678", "password", "qwertz"};
 
         for (int i = 0; i <= weakPassword.length - 1; i++)
-            if (password.equals(weakPassword[i])) {
+            if (password.toLowerCase(Locale.ROOT).equals(weakPassword[i])) {
                 return true;
             }
 

@@ -30,6 +30,7 @@ public class PasswordValidator {
 
     public boolean hasNumber (String password) {
         char[] compareArray = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'};
+
         for (int i = 0; i <= password.length() - 1; i++) {
             for (int j = 0; j <= compareArray.length - 1; j++) {
                 if (password.charAt(i) == compareArray[j]) {
@@ -37,18 +38,34 @@ public class PasswordValidator {
                 }
             }
         }
-
         return false;
     }
 
     //8 Numbers required
-    public boolean hasUpperCase (String password){
-        return true;
+    public boolean hasLowerCase(String password){
+        char[] compareArray = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
 
+        for (int i = 0; i <= password.length() - 1; i++) {
+            for (int j = 0; j <= compareArray.length - 1; j++) {
+                if (password.charAt(i) == compareArray[j]) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
-    public boolean hasLowerCase (String password){
+    public boolean hasUpperCase(String password){
+        char[] compareArray = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
 
-        return true;
+        for (int i = 0; i <= password.length() - 1; i++) {
+            for (int j = 0; j <= compareArray.length - 1; j++) {
+                if (password.charAt(i) == compareArray[j]) {
+                    return true;
+                }
+            }
+        }
+        return false;
+
     }
 }

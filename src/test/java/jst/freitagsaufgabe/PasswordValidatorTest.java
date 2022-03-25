@@ -7,10 +7,22 @@ import static org.junit.jupiter.api.Assertions.*;
 class PasswordValidatorTest {
     PasswordValidator validator = new PasswordValidator();
 
+    //Main Method
     @Test
-    void isValidPassword() {
+    void isValidPassword_whenSimpleAndValid_thenTrue() {
+        String input = "abcdefg2";
+        String group = "simple";
+        assertTrue(validator.isValidPassword(input, group));
     }
 
+    @Test
+    void isValidPassword_whenSimpleAndInvalid_thenTrue() {
+        String input = "abcdefgt";
+        String group = "simple";
+        assertTrue(validator.isValidPassword(input, group));
+    }
+
+    // Validation Groups
     @Test
     void isValidSimple_whenLengthAndNumbers_thenTrue() {
         String input = "abcdefg12";
@@ -29,6 +41,7 @@ class PasswordValidatorTest {
         assertFalse(validator.isValidSimple(input));
     }
 
+    // Validation Steps
     @Test
     void hasLength_when7_thenFalse() {
         String input = "abcdefg";
@@ -77,6 +90,29 @@ class PasswordValidatorTest {
         assertTrue(validator.hasLowerCase(input));
     }
 
+    @Test
+    void isWeak_whenWeak_thenTrue() {
+        String input = "qwertz";
+        assertTrue(validator.isWeak(input));
+    }
 
+    @Test
+    void isWeak_whenStrong_thenFalse() {
+        String input = "1x2yTZU00";
+        assertFalse(validator.isWeak(input));
+    }
 
+    @Test
+    void doesStringContains_True() {
+        String input = "test";
+        char[] compareArray = {'t', 'a'};
+        assertTrue(validator.doesStringContains(input, compareArray));
+    }
+
+    @Test
+    void doesStringContains_False() {
+        String input = "test";
+        char[] compareArray = {'b', 'a'};
+        assertFalse(validator.doesStringContains(input, compareArray));
+    }
 }

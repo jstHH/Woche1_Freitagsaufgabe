@@ -4,7 +4,15 @@ public class PasswordValidator {
 
     //Validator Main Method ---------
 
-    public boolean isValidPassword (String password) {
+    public boolean isValidPassword (String password, String group) {
+
+        switch (group) {
+            case "simple":
+                isValidSimple(password);
+                break;
+            default:
+                isValidSimple(password);
+        }
 
         return true;
     }
@@ -53,7 +61,19 @@ public class PasswordValidator {
         return false;
     }
 
+    public boolean isWeak(String password) {
+        String[] weakPassword = {"123456", "123456789", "12345678", "password", "qwertz"};
+
+        for (int i = 0; i <= weakPassword.length - 1; i++)
+            if (password.equals(weakPassword[i])) {
+                return true;
+            }
+
+        return false;
+    }
+
     public boolean doesStringContains(String toCheck, char[] compareArray) {
+
         for (int i = 0; i <= toCheck.length() - 1; i++) {
             for (int j = 0; j <= compareArray.length - 1; j++) {
                 if (toCheck.charAt(i) == compareArray[j]) {

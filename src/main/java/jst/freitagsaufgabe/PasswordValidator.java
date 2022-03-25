@@ -2,19 +2,37 @@ package jst.freitagsaufgabe;
 
 public class PasswordValidator {
 
-    //Validator Main Method ---------
+
+    //Validator Main Methods ---------
+    public boolean isValidPassword (String password) {
+
+        if (isValidSimple(password)) {
+            return true;
+        }
+
+        return false;
+    }
 
     public boolean isValidPassword (String password, String group) {
 
         switch (group) {
             case "simple":
-                isValidSimple(password);
+                if (isValidPassword(password)) {
+                    return true;
+                }
+                break;
+            case "advanced":
+                if (isValidAdvanced(password)) {
+                    return true;
+                }
                 break;
             default:
-                isValidSimple(password);
+                if (isValidSimple(password)) {
+                    return true;
+                }
         }
 
-        return true;
+        return false;
     }
 
     //Validation Groups (Simple, Advanced ...)
@@ -23,6 +41,15 @@ public class PasswordValidator {
         if (hasLength(password) && hasNumber(password))
             return true;
 
+        return false;
+    }
+
+    public boolean isValidAdvanced(String password) {
+        if (isValidSimple(password)) {
+            if (hasLowerCase(password) && hasUpperCase(password) && !(isWeak(password))) {
+                return true;
+            }
+        }
         return false;
     }
 

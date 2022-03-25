@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PasswordValidatorTest {
     PasswordValidator validator = new PasswordValidator();
 
+
     //Main Method
     @Test
     void isValidPassword_whenSimpleAndValid_thenTrue() {
@@ -16,10 +17,10 @@ class PasswordValidatorTest {
     }
 
     @Test
-    void isValidPassword_whenSimpleAndInvalid_thenTrue() {
+    void isValidPassword_whenSimpleAndInvalid_thenFalse() {
         String input = "abcdefgt";
         String group = "simple";
-        assertTrue(validator.isValidPassword(input, group));
+        assertFalse(validator.isValidPassword(input, group));
     }
 
     // Validation Groups

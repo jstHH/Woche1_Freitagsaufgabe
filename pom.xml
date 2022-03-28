@@ -24,7 +24,7 @@
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>libs/</classpathPrefix>
                             <mainClass>
-                                jst.aufgaben.Main
+                                jst.freitagsaufgabe.Main
                             </mainClass>
                         </manifest>
                     </archive>
